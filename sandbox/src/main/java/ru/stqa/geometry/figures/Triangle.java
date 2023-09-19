@@ -15,7 +15,7 @@ public class Triangle {
     }
 
     public double area() {
-        return sqrt(perimeter() * (perimeter() - this.a) * (perimeter() - this.b) * (perimeter() - this.c));
+        return Math.round(sqrt(perimeter() * (perimeter() - this.a) * (perimeter() - this.b) * (perimeter() - this.c)) * 100.0) / 100.0;
     }
 
     public double perimeter() {
