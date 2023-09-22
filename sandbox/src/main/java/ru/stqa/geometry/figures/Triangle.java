@@ -19,7 +19,7 @@ public class Triangle {
     }
 
     public double perimeter() {
-        return (this.a + this.b + this.c) / 2.0;
+        return (this.a + this.b + this.c);
     }
 
 }
