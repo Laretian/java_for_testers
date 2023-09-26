@@ -15,11 +15,12 @@ public class Triangle {
     }
 
     public double area() {
-        return Math.round(sqrt((perimeter() / 2) * (perimeter() - this.a) * (perimeter() - this.b) * (perimeter() - this.c)) * 100.0) / 100.0;
+        var P = perimeter() / 2;
+        return Math.round(sqrt(P * (P - a) * (P - b) * (P - c)) * 100.0) / 100.0;
     }
 
     public double perimeter() {
-        return (this.a + this.b + this.c);
+        return (a + b + c);
     }
 
 }
