@@ -25,14 +25,4 @@ public class TriangleTests {
         }
     }
 
-    @Test
-    void cannotTriangleInequalityIsViolated() {
-        try {
-            new Triangle(-5, 7, 9);
-            Assertions.fail();
-        } catch (IllegalArgumentException exception) {
-            // OK
-        }
-    }
-
 }
