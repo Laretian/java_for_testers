@@ -59,13 +59,13 @@ public class SquareTests {
     void testFail() {
         var s1 = new Square(5.0);
         var s2 = new Square(5.0);
-        Assertions.assertTrue(s1 == s2);
+        Assertions.assertTrue(s1 == s2);  // false
     }
 
     @Test
     void testPass() {
         var s1 = new Square(5.0);
         var s2 = new Square(5.0);
-        Assertions.assertTrue(s1.equals(s2));
+        Assertions.assertTrue(s1.equals(s2));  // true
     }
 }
