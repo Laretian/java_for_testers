@@ -48,7 +48,7 @@ public class TriangleTests {
         var c = 4;
 
         var triangle = new Triangle(a, b, c);
-        var triangle1 = new Triangle(a, c ,b);
+        var triangle1 = new Triangle(a, c, b);
 
         Assertions.assertEquals(triangle, triangle1);
     }
