@@ -20,4 +20,9 @@ public class HelperBase {
     protected void click(By locator) {
         manager.driver.findElement(locator).click();
     }
+
+    protected void confirmAction() {
+        manager.driver.switchTo().alert().accept();
+    }
+
 }

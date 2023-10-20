@@ -17,7 +17,7 @@ public class GroupHelper extends HelperBase {
 
     public boolean isGroupPresent() {
         openGroupsPage();
-        return manager.isElementPresent(By.name("name"));
+        return manager.isElementPresent(By.xpath("//span[contains(@class, \"group\")]"));
     }
 
     public void createGroup(GroupData group) {
