@@ -10,8 +10,14 @@ public class ContactHelper extends HelperBase {
     }
 
     public void openContactPage() {
-        if (!manager.isElementPresent(By.name("submit"))) {
+        if (!manager.isElementPresent(By.name("firstName"))) {
             click(By.linkText("add new"));
+        }
+    }
+
+    public void openHomePage() {
+        if (!manager.isElementPresent(By.id("maintable"))) {
+            click(By.linkText("home"));
         }
     }
 
@@ -22,6 +28,7 @@ public class ContactHelper extends HelperBase {
         returnToHomePage();
     }
     public void removeContact() {
+        openHomePage();
         selectContact();
         removeSelectContacts();
         confirmAction();
@@ -31,6 +38,23 @@ public class ContactHelper extends HelperBase {
         selectAllContacts();
         removeSelectContacts();
         confirmAction();
+    }
+
+    public void modifyContact(ContactData modifiedContact) {
+        openHomePage();
+        selectContact();
+        initContactModification();
+        fillContactForm(modifiedContact);
+        submitContactModification();
+        returnToHomePage();
+    }
+
+    private void submitContactModification() {
+        click(By.name("update"));
+    }
+
+    private void initContactModification() {
+        click(By.xpath("//a/img[contains(@title, \"Edit\")]"));
     }
 
     public int getCount() {
