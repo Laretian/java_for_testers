@@ -10,7 +10,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void openContactPage() {
-        if (!manager.isElementPresent(By.name("new"))) {
+        if (!manager.isElementPresent(By.name("submit"))) {
             click(By.linkText("add new"));
         }
     }
@@ -23,10 +23,20 @@ public class ContactHelper extends HelperBase {
     }
     public void removeContact() {
         selectContact();
-        removeSelectContact();
+        removeSelectContacts();
         confirmAction();
     }
 
+    public void removeAllContacts() {
+        selectAllContacts();
+        removeSelectContacts();
+        confirmAction();
+    }
+
+    public int getCount() {
+        openContactPage();
+        return manager.driver.findElements(By.name("selected[]")).size();
+    }
 
     private void returnToHomePage() {
         click(By.linkText("home page"));
@@ -41,15 +51,19 @@ public class ContactHelper extends HelperBase {
         type(By.name("lastname"), contact.lastName());
     }
 
-    private void removeSelectContact() {
-        click(By.xpath("//input[@value=\'Delete\']"));
+    private void removeSelectContacts() {
+        click(By.xpath("//input[@value='Delete']"));
     }
 
     private void selectContact() {
         click(By.xpath("//input[contains(@name, \"selected[]\")]"));
     }
 
-    public boolean isContactPresent() {
-        return manager.isElementPresent(By.xpath("//tr[contains(@name, \"entry\")]"));
+    public void selectAllContacts() {
+        var checkboxes = manager.driver.findElements(By.xpath("//input[contains(@name, \"selected[]\")]"));
+        for (var checkbox : checkboxes) {
+            checkbox.click();
+        }
     }
+
 }
