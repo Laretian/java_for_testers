@@ -35,6 +35,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void removeAllContacts() {
+        openHomePage();
         selectAllContacts();
         removeSelectContacts();
         confirmAction();
@@ -58,7 +59,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public int getCount() {
-        openContactPage();
+        openHomePage();
         return manager.driver.findElements(By.name("selected[]")).size();
     }
 
