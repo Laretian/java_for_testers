@@ -1,7 +1,11 @@
 package manager;
 
 import model.ContactData;
+import model.GroupData;
 import org.openqa.selenium.By;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -27,9 +31,9 @@ public class ContactHelper extends HelperBase {
         submitContactCreation();
         returnToHomePage();
     }
-    public void removeContact() {
+    public void removeContact(ContactData contact) {
         openHomePage();
-        selectContact();
+        selectContact(contact);
         removeSelectContacts();
         confirmAction();
     }
@@ -43,7 +47,7 @@ public class ContactHelper extends HelperBase {
 
     public void modifyContact(ContactData modifiedContact) {
         openHomePage();
-        selectContact();
+        selectContact(null);
         initContactModification();
         fillContactForm(modifiedContact);
         submitContactModification();
@@ -80,8 +84,8 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//input[@value='Delete']"));
     }
 
-    private void selectContact() {
-        click(By.xpath("//input[contains(@name, \"selected[]\")]"));
+    private void selectContact(ContactData contact) {
+        click(By.cssSelector(String.format("input[value='%s']", contact.id())));
     }
 
     public void selectAllContacts() {
@@ -91,4 +95,17 @@ public class ContactHelper extends HelperBase {
         }
     }
 
+    public List<ContactData> getList() {
+        openHomePage();
+        var contacts = new ArrayList<ContactData>();
+        var tds = manager.driver.findElements(By.name("entry"));
+        for (var td : tds) {
+            var name = td.findElement(By.cssSelector("td:nth-child(2)")).getText();
+            var lastName = td.findElement(By.cssSelector("td:nth-child(3)")).getText();
+            var checkbox = td.findElement(By.xpath("//input[contains(@name, \"selected[]\")]"));
+            var id = checkbox.getAttribute("value");
+            contacts.add(new ContactData().withId(id).withName(name).withLastName(lastName));
+        }
+        return contacts;
+    }
 }
